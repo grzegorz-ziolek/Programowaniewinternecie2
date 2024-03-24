@@ -33,3 +33,9 @@ body, html {
 .cell:hover {
     background-color: #e4e4e4;
 }
+
+.game-mode {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
