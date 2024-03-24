@@ -1,5 +1,5 @@
 let currentPlayer = 'O';
-let gameMode = ''; // 'single' dla gry z komputerem, 'multi' dla gry z drugim graczem
+let gameMode = 'single'; // Domyślnie ustawiony na grę z komputerem
 
 function setGameMode(mode) {
     gameMode = mode;
