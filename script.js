@@ -9,14 +9,29 @@ function setGameMode(mode) {
 function play(cell) {
     if (cell.textContent === '') {
         cell.textContent = currentPlayer;
+        if (checkWinner()) {
+            setTimeout(() => {
+                alert(currentPlayer + ' wygrywa!');
+                resetGame();
+            }, 100);
+            return;
+        }
         if (gameMode === 'single' && currentPlayer === 'O') {
-            setTimeout(computerMove, 500); // Komputer wykonuje ruch po 0.5 sekundy
-            // Nie zmieniaj tutaj currentPlayer, ponieważ zostanie on zmieniony po ruchu komputera w funkcji computerMove
+            setTimeout(() => {
+                computerMove();
+                if (checkWinner()) {
+                    setTimeout(() => {
+                        alert('Komputer wygrywa!');
+                        resetGame();
+                    }, 100);
+                }
+            }, 500);
         } else if (gameMode === 'multi') {
             currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
         }
     }
 }
+
 
 function computerMove() {
     const availableCells = Array.from(document.querySelectorAll('.cell')).filter(c => c.textContent === '');
@@ -34,4 +49,21 @@ function resetGame() {
         cell.textContent = '';
     });
     currentPlayer = 'O';
+}
+
+function checkWinner() {
+    const cells = document.querySelectorAll('.cell');
+    const winningCombinations = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+        [0, 4, 8], [2, 4, 6] // diagonals
+    ];
+
+    for (let combination of winningCombinations) {
+        const [a, b, c] = combination;
+        if (cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent) {
+            return cells[a].textContent;
+        }
+    }
+    return null;
 }
