@@ -1,5 +1,6 @@
 let currentPlayer = 'O';
 let gameMode = 'single'; // Domyślnie ustawiony na grę z komputerem
+resetGame();
 
 function setGameMode(mode) {
     gameMode = mode;
@@ -11,23 +12,23 @@ function play(cell) {
         cell.textContent = currentPlayer;
         let winner = checkWinner();
         if (winner) {
-            setTimeout(() => {
-                alert(winner + ' wygrywa!');
-                resetGame();
-            }, 100);
+            alert(winner + ' wygrywa!');
+            resetGame();
             return;
         } else if (!winner && gameMode === 'single') {
-            setTimeout(() => {
-                computerMove();
-            }, 500);
+            computerMove(); // Usunięto setTimeout, aby ruch komputera był natychmiastowy
+            winner = checkWinner();
+            if (winner) {
+                alert(winner + ' wygrywa!');
+                resetGame();
+            }
         }
-        // Aktualizacja gracza powinna nastąpić tylko w trybie multi
+        // Zmiana currentPlayera tylko w trybie gry dla dwóch graczy
         if (gameMode === 'multi') {
             currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
         }
     }
 }
-
 
 
 function computerMove() {
