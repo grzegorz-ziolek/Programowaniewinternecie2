@@ -9,28 +9,25 @@ function setGameMode(mode) {
 function play(cell) {
     if (cell.textContent === '') {
         cell.textContent = currentPlayer;
-        if (checkWinner()) {
+        let winner = checkWinner();
+        if (winner) {
             setTimeout(() => {
-                alert(currentPlayer + ' wygrywa!');
+                alert(winner + ' wygrywa!');
                 resetGame();
             }, 100);
             return;
-        }
-        if (gameMode === 'single' && currentPlayer === 'O') {
+        } else if (!winner && gameMode === 'single') {
             setTimeout(() => {
                 computerMove();
-                if (checkWinner()) {
-                    setTimeout(() => {
-                        alert('Komputer wygrywa!');
-                        resetGame();
-                    }, 100);
-                }
             }, 500);
-        } else if (gameMode === 'multi') {
+        }
+        // Aktualizacja gracza powinna nastąpić tylko w trybie multi
+        if (gameMode === 'multi') {
             currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
         }
     }
 }
+
 
 
 function computerMove() {
