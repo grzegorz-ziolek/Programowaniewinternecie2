@@ -1,5 +1,5 @@
 let currentPlayer = 'O';
-let gameMode = 'multi';
+let gameMode = 'single';
 resetGame();
 
 function setGameMode(mode) {
