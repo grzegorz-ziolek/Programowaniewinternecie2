@@ -36,8 +36,18 @@ body, html {
 
 .game-mode {
     width: 100%;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    background-color: orange;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
 }
